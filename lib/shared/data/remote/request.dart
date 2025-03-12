@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:app_boilerplate/shared/data/local/constant.dart';
+import 'package:flutter_template/shared/data/local/constant.dart';
 import 'package:dio/dio.dart';
 
 enum HttpMethod { get, post, patch, put, delete }
 
-class Request {
+class DioClient {
   static String getUri(String path) {
     return "${Const.proxyAddress}$path";
   }

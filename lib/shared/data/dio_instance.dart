@@ -1,4 +1,4 @@
-import 'package:app_boilerplate/shared/data/session_interceptor.dart';
+import 'package:flutter_template/shared/data/session_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -16,7 +16,6 @@ Dio dio(Ref ref) {
     connectTimeout: const Duration(seconds: 30),
     receiveTimeout: const Duration(seconds: 30),
   );
-
   dio.interceptors.add(SessionInterceptor());
   return dio;
 }
