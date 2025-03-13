@@ -13,6 +13,5 @@ class AppProvider extends Notifier<ThemeMode> {
 
   void toggleTheme() {
     state = (state == ThemeMode.light) ? ThemeMode.dark : ThemeMode.light;
-    print('ThemeMode: $state');
   }
 }

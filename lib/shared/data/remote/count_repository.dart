@@ -1,5 +1,4 @@
 import 'package:flutter_template/shared/data/dio_instance.dart';
-import 'package:flutter_template/shared/data/remote/request.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
