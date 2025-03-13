@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_template/shared/data/local/constant.dart';
 import 'package:dio/dio.dart';
 

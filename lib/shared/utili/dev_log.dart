@@ -7,13 +7,6 @@ class Log {
     printer: PrettyPrinter(methodCount: 0, errorMethodCount: 5, lineLength: 80, colors: true, printEmojis: true),
   );
 
-  /// logs for development
-  static void v(String? text) {
-    if (!kReleaseMode) {
-      _logger.v(text);
-    }
-  }
-
   /// for debug. connection, data logs
   static void d(String text) {
     if (!kReleaseMode) {
