@@ -1,19 +1,28 @@
-# flutter_template
-
-## Getting Started
+# Getting Started
 
 개발하면서 불편했던점을 해소하고자 기본적인 설정과 의존성을 추가한 플러터 프로젝트 템플릿입니다.
+
+Riverpod을 사용하면 기본적으로 provider는 전역적으로 사용할 수 있는 점이 장점이자 단점입니다.
+
+어느곳에서는 접근이 가능하다는 것은 스파게티 코드가 될 수 있다는 문제를 야기하는데요, 위에 Riverpod을 맛있게 사용하는 방법을 보고 이 문제를 해결할 수 있게 되었습니다.
 
 아키텍쳐의 구조는 FSD(Future Slice Design)를 기반으로 하고
 있으며, [Riverpod을 맛있게 사용 하는 글](https://medium.com/jobkorea-tech/flutter-riverpod%EC%9D%84-%EB%A7%9B%EC%9E%88%EA%B2%8C-%EB%AF%B9%EC%8A%A4%EC%9D%B8-%ED%95%98%EA%B8%B0-a7d2481396ff)
 의 내용도 참고하였습니다.
 
-## Dependencies
+# Version
+
+```bash
+flutter : 3.27.4
+dart : 3.6.4
+```
+
+
+# Dependencies
 
 - [flutter_riverpod](https://pub.dev/packages/flutter_bloc)
 - [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
 - [gap](https://pub.dev/packages/gap)
-- [shadcn_ui](https://pub.dev/packages/shadcn_ui)
 - [go_router](https://pub.dev/packages/go_router)
 - [dio](https://pub.dev/packages/dio)
 - [freezed](https://pub.dev/packages/freezed)
@@ -21,56 +30,60 @@
 - [logger](https://pub.dev/packages/logger)
 - [mockito](https://pub.dev/packages/mockito)
 
-## Motivation
+# 프로젝트 구조
 
-Riverpod을 사용하면 기본적으로 provider는 전역적으로 사용할 수 있는 점이 장점이자 단점입니다.
+![기능 분할 설계 이미지](https://github.com/user-attachments/assets/0cab04e4-d671-42c6-b6bb-3424953fde39)
 
-어느곳에서는 접근이 가능하다는 것은 스파게티 코드가 될 수 있다는 문제를 야기하는데요, 위에 Riverpod을 맛있게 사용하는 방법을 보고 이 문제를 해결할 수 있게 되었습니다.
+## 📂 프로젝트 레이어 구성
 
-## Basic information
+### 🔹 shared
+특정 비즈니스 로직에 종속되지 않은 **재사용 가능한 컴포넌트와 유틸리티**가 포함된 레이어입니다.
 
-```bash
-flutter : 3.27.4
-dart : 3.6.4
-```
+- **utils** : 애플리케이션 전반에 사용되는 유틸리티 함수들의 집합
+- **data** : 애플리케이션 데이터에 접근하는 클래스들의 집합
+  - **local** : 앱 내부 저장소에 대한 데이터 접근
+  - **remote** : 네트워크 요청을 처리하는 클래스들
 
-## How to use
+---
 
-```bash
-flutter pub get
-flutter run
-```
+### 🔹 entities
+비즈니스 **엔티티 (Entity, Model, DTO)** 를 나타내는 레이어입니다.
 
-## Features
+---
 
-app: 애플리케이션 로직이 초기화되는 곳입니다.
+### 🔹 app
+애플리케이션이 **초기화**되는 레이어입니다.
 
-- app.dart : 애플리케이션 로직이 초기화되는 곳입니다.
-- app_providers.dart : 애플리케이션에 전역적으로 사용되는 provider를 정의 합니다(현재는 테마만 정의 되어있음).
-- routes.dart : 애플리케이션의 모든 경로를 정의합니다.
+- `app.dart` : 애플리케이션 로직 초기화
+- `app_providers.dart` : 전역적으로 사용되는 Provider 정의 (예: 테마 설정)
+- `routes.dart` : 애플리케이션의 모든 경로(Route) 정의
 
-pages: 이 레이어에는 애플리케이션의 페이지들의 집합입니다. 구성요소로는 page, state, event로 구성되어있습니다.
+---
 
-- home : 숫자 증감 예시 페이지
+### 🔹 pages
+애플리케이션의 **페이지 집합**입니다.  
+페이지는 다음과 같은 구조를 가집니다:
 
-features: 이 레이어는 특정 기능에 대한 집합입니다. 기능 단위로 구성됩니다.
+- **page** : UI 레이아웃을 정의
+- **state** : 상태 관리
+- **event** : 이벤트 처리
 
-- count : home 페이지에서 사용되는 증감 기능들의 구현체입니다.
+📌 예제  
+- **home** : 숫자 증감 예시 페이지
 
-entities: 이 레이어는 비즈니스 엔티티를 나타냅니다.
+---
 
-- 예를 들면 dto, model, entity가 포함될 수 있습니다.
+### 🔹 features
+특정 **기능 단위**로 구성된 레이어입니다.
 
-shared: 이 레이어에는 특정 비즈니스 로직에 종속되지 않은 재사용 가능한 컴포넌트와 유틸리티가 포함되어 있습니다.
+- **count** : home 페이지에서 사용되는 숫자 증감 기능의 구현체
 
-- utils : 애플리케이션 전반에 사용되는 유틸리티 함수들의 집합입니다.
-- data : 애플리케이션 데이터에 대해 접근하는 클래스들의 집합입니다.
-    - local : 앱 내부에 저장되는 데이터들에 대한 접근하는 클래스들의 집합입니다.
-    - remote : 네트워크 요청이 발생하는 클래스들의 집합입니다.
+---
 
-widgets: 앱에 사용되는 UI 컴포넌트들의 집합입니다.
+### 🔹 features
+앱에 사용되는 UI 컴포넌트들의 집합입니다.
 
-## Testing
+# Testing
 
 [공식문서](https://riverpod.dev/docs/cookbooks/testing/)를 참고하였으며, 해당 템플릿에는 Home화면에서 일어나는 테스트에 대해 작성되어 있습니다.
 
