@@ -16,6 +16,7 @@ Dio dio(Ref ref) {
     connectTimeout: const Duration(seconds: 30),
     receiveTimeout: const Duration(seconds: 30),
   );
+  dio.options = options;
   dio.interceptors.add(SessionInterceptor());
   return dio;
 }
