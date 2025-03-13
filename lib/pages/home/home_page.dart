@@ -1,9 +1,8 @@
-import 'package:flutter_template/pages/home/home_event.dart';
-import 'package:flutter_template/pages/home/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_template/pages/home/home_event.dart';
+import 'package:flutter_template/pages/home/home_state.dart';
 import 'package:gap/gap.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 class HomePage extends ConsumerWidget with HomeState, HomeEvent {
   const HomePage({super.key});
@@ -20,12 +19,11 @@ class HomePage extends ConsumerWidget with HomeState, HomeEvent {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
+              key: const Key('count_text'),
               "Count : ${count(ref)}",
-              style: ShadTheme.of(context).textTheme.h2,
             ),
             Gap(16),
-            ShadButton(
-              width: double.infinity,
+            ElevatedButton(
               onPressed: () => fetchCount(ref),
               child: Text('Fetch Count'),
             ),
@@ -34,13 +32,13 @@ class HomePage extends ConsumerWidget with HomeState, HomeEvent {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  child: ShadButton(
+                  child: ElevatedButton(
                     onPressed: () => increment(ref),
                     child: Text('+'),
                   ),
                 ),
                 Expanded(
-                  child: ShadButton(
+                  child: ElevatedButton(
                     onPressed: () => decrement(ref),
                     child: Text('-'),
                   ),
