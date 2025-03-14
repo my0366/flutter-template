@@ -17,9 +17,6 @@ class MyApp extends ConsumerWidget {
         ],
       ),
       routerConfig: router,
-      supportedLocales: const [
-        Locale('ko'),
-      ],
       restorationScopeId: 'app',
     );
   }
